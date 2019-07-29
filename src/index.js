@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from '././script/App';
+//import App from '././script/App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import DashApp from './script/containers/dashApp';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(<DashApp />, document.getElementById('root'));
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./script/containers/dashApp.js', () => {
+    const NextApp = require('./script/containers/dashApp').default;
+    ReactDOM.render(<NextApp />, document.getElementById('root'));
+  });
+}
+//registerServiceWorker();
 serviceWorker.unregister();
